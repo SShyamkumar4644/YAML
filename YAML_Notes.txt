@@ -1,0 +1,176 @@
+# Use # for commenting
+# STEP 1:
+# Key value pairs
+"apple" : "I am a red fruit"
+1: "this is Kunal's roll number"
+
+# lists
+# YAML is case-sensitive, which in the list apple and Apple are two different
+#things
+- apple
+- mango
+- banana
+- Apple
+
+#Block Style
+# Go to site YAML Lint (https://www.yamllint.com/) to check the syntax
+cities:
+- new delhi
+- mumbai
+- gujrat
+
+# STEP 2:
+# The thing here is above we have 3 documents
+# How will YAML file know that we have key-value pair document,
+# Lists document and Blocks documents, to differentiate add "---"
+# After adding "---" it will be like below:
+
+# Key value pairs
+"apple" : "I am a red fruit"
+1: "this is Kunal's roll number"
+---
+# lists
+- apple
+- mango
+- banana
+- Apple
+---
+#Block Style
+cities:
+- new delhi
+- mumbai
+- gujrat
+
+# STEP 3:
+# Now if you want to end the document means,
+# Add only three dots at end "..."
+# After adding "..." it will be like below
+
+# Key value pairs
+"apple" : "I am a red fruit"
+1: "this is Kunal's roll number"
+---
+# lists
+- apple
+- mango
+- banana
+- Apple
+---
+#Block Style
+cities:
+- new delhi
+- mumbai
+- gujrat
+...
+
+# STEP 4:
+# If you want to check the Block Style code will look in JSON
+# Visit: https://onlineyamltools.com/convert-yaml-to-json
+# And paste in cities object in YAML and see how it will look in JSON
+
+# STEP 5
+# If you want to store the below without relying on identation,
+# You can use below format, flow type
+
+cities:
+  - new delhi
+- mumbai
+  - gujrat
+
+# The above will throw identation error
+# Below you can use to avoid the error
+---
+cities: [new delhi, mumbai]
+---
+
+# STEP 5
+# You can do the same for Key value pairs
+
+{mango: "yellow fruit", age: "56"}
+
+---
+
+# Datatypes:
+
+# String variables
+myself: Kunal Kushwaha
+fruit: "apple"
+job: 'swe'
+
+bio: | 
+ hey my name is kunal kushwaha.
+ i am a very nice dude.
+
+# write a single line in multiple lines
+message: >
+ this will 
+ all be 
+ in one single line.
+
+# Check out datatype.yaml file furthur
+
+# Advanced datatype
+# Sparse sequence: Some values will be missing
+
+sparse seq:
+ - hey
+ - how
+ - 
+ - Null
+ - sup
+
+# reusing some properties using anchors
+likings: 
+  fav fruit: mango
+  dislikes: grapes
+
+person1:
+  name: Kunal Kushwaha
+  fav fruit: mango
+  dislikes: grapes
+
+person2:
+  name: Rahul
+  fav fruit: mango
+  dislikes: grapes
+
+person3:
+  name: Sam
+  fav fruit: mango
+  dislikes: grapes
+
+# The thing over here is there are 3 persons who might have
+# same things of interest
+
+# for that use anchors instead of copypasting
+
+likings: &likes
+  fav fruit: mango
+  dislikes: grapes
+
+person1:
+  name: Kunal Kushwaha
+  <<: *likes
+
+person2:
+  name: Rahul
+  <<: *likes
+
+# use "<<" to specify and map the value which are same which is "*"
+
+#You can override the values like the below:
+
+likings: &likes
+  fav fruit: mango
+  dislikes: grapes
+
+person1:
+  name: Kunal Kushwaha
+  <<: *likes
+
+person2:
+  name: Rahul
+  <<: *likes
+  dislikes: berries
+
+# Now dislikes will be overridden
